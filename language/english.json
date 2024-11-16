@@ -1,0 +1,42 @@
+{
+	"skill" : {
+		"jammanZ" : {
+			"name" : "Stab",
+			"description" : "Stab for <y>90% damage</c> hitting <y>up to 5</c> enemies."
+		},
+		"jammanX" : {
+			"name" : "Raspberry Bullet",
+			"description" : "Fire a projectile from your rod for <y>60% damage.</c>\n<y>Pierces enemies</c> and causes bleeding for <y>4x60% damage</c> over time."
+        },
+        "jammanX2" : {
+			"name" : "Spoiled Bullet",
+			"description" : "Fire a projectile from your rod for <y>80% damage.</c>\n<y>Pierces enemies</c> and <b>poison</c> them."
+		},
+		"jammanC" : {
+			"name" : "Roll",
+			"description" : "<y>Roll forward</c> a small distance.\nYou <b>cannot be hit</c> while rolling."
+		},
+		"jammanV" : {
+			"name" : "Spikes of Death",
+			"description" : "Form spikes in front of yourself dealing up to <y>3x240% damage</c>."
+		},
+		"jammanVBoosted" : {
+			"name" : "Spikes of Super Death",
+			"description" : "Form spikes in both directions dealing up to <y>2x3x240% damage</c>."
+		}
+	},
+
+	"survivor" : {
+		"jamman" : {
+			"endQuote" : "..and so it left, still not knowing how it got here to begin with.",
+			"description" : "The <y>Jam Man</c> is an <y>example character</c> intended to serve as a base for other characters.\n<y>Stab</c> can hit more enemies at a time compared to other melee attacks.\n<y>Raspberry Bullet</c> can be used as an opener to deal extra damage as you use other skills.\n<y>Spikes of Death</c> is very effective against large groups.",
+			"name" :  "Jam Man",
+			"nameUpper" : "JAM MAN",
+
+			"story" : "<ul>Passenger Details:\n<y>[Merchandise Class] \n\n<ul>This pot of jam seems expired.",
+            "id" : "Travel ID: 53C1992745627123502",
+            "departure"  : "<y>Departure:</c>\nFridge,\nGrandma's House,\nEarth",
+            "arrival" : "<y>Destination:</c>\nBread,\nPlate,\nEarth"
+		}
+	}
+}
