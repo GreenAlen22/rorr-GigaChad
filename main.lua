@@ -54,7 +54,7 @@ local initialize = function()
     gigachad.sprite_portrait_small = Resources.sprite_load(NAMESPACE, "sGigachadPortraitSmall", path.combine(PATH, "gigachad", "sGigachadPortraitSmall.png"))
     
     -- The character's sprite logo portrait
-    gigachad.sprite_portrait_logo = Resources.sprite_load(NAMESPACE, "sGigachadPortraitLogo", path.combine(PATH, "gigachad", "sGigachadPortraitLogo.png"))
+    --gigachad.sprite_portrait_logo = Resources.sprite_load(NAMESPACE, "sGigachadPortraitLogo", path.combine(PATH, "gigachad", "sGigachadPortraitLogo.png"))
 
 
     gigachad.sprite_title = sprites.walk -- The character's walk animation on the title screen when selected
