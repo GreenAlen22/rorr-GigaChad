@@ -1,42 +1,38 @@
 {
 	"skill" : {
-		"jammanZ" : {
+		"GigachadZ" : {
 			"name" : "Stab",
 			"description" : "Stab for <y>90% damage</c> hitting <y>up to 5</c> enemies."
 		},
-		"jammanX" : {
-			"name" : "Raspberry Bullet",
-			"description" : "Fire a projectile from your rod for <y>60% damage.</c>\n<y>Pierces enemies</c> and causes bleeding for <y>4x60% damage</c> over time."
+		"GigachadX" : {
+			"name" : "Seismic shift",
+			"description" : "You deliver a powerful stomp on the ground, creating stone spikes from the earth and dealing <y>2x3x400% damage.</c>"
         },
-        "jammanX2" : {
-			"name" : "Spoiled Bullet",
-			"description" : "Fire a projectile from your rod for <y>80% damage.</c>\n<y>Pierces enemies</c> and <b>poison</c> them."
+		"GigachadC" : {
+			"name" : "A moment",
+			"description" : "<y>You move forward</c> a short distance.\nDuring this time, you are <b>invulnerable</c>."
 		},
-		"jammanC" : {
-			"name" : "Roll",
-			"description" : "<y>Roll forward</c> a small distance.\nYou <b>cannot be hit</c> while rolling."
+		"GigachadV" : {
+			"name": "Star Fury",
+			"description": "You perform a series of quick but light strikes, dealing <y>20% damage</c> with each hit. \n<b>For each hit, you gain a shield worth 35% of the damage dealt</c>"		
 		},
-		"jammanV" : {
-			"name" : "Spikes of Death",
-			"description" : "Form spikes in front of yourself dealing up to <y>3x240% damage</c>."
-		},
-		"jammanVBoosted" : {
-			"name" : "Spikes of Super Death",
-			"description" : "Form spikes in both directions dealing up to <y>2x3x240% damage</c>."
+		"GigachadVBoosted" : {
+			"name": "Cosmic Radiance",
+			"description": "You perform a series of quick but light strikes, dealing <y>31% damage</c> with each hit. \n<b>While striking, you are invulnerable</c>"		
 		}
 	},
 
 	"survivor" : {
-		"jamman" : {
-			"endQuote" : "..and so it left, still not knowing how it got here to begin with.",
-			"description" : "The <y>Jam Man</c> is an <y>example character</c> intended to serve as a base for other characters.\n<y>Stab</c> can hit more enemies at a time compared to other melee attacks.\n<y>Raspberry Bullet</c> can be used as an opener to deal extra damage as you use other skills.\n<y>Spikes of Death</c> is very effective against large groups.",
-			"name" :  "Jam Man",
-			"nameUpper" : "JAM MAN",
+		"Gigachad" : {
+			"endQuote" : "..and he walked away, dazzling with his muscles.",
+			"description" : "<y>Gigachad</c> is an unmatched specimen of strength, speed, and charisma, dominating the battlefield with his physical prowess. His abilities combine <y>high damage with survivability</c>, making him perfect for crushing enemies <y>in style.</c>",
+			"name": "Gigachad",
+			"nameUpper": "GIGACHAD",
 
-			"story" : "<ul>Passenger Details:\n<y>[Merchandise Class] \n\n<ul>This pot of jam seems expired.",
-            "id" : "Travel ID: 53C1992745627123502",
-            "departure"  : "<y>Departure:</c>\nFridge,\nGrandma's House,\nEarth",
-            "arrival" : "<y>Destination:</c>\nBread,\nPlate,\nEarth"
+			"story": "<y>Shipping Details: </c>\nRecent experiments with memetic genetics have led us to the creation of a being we have tentatively named 'Gigachad.' This entity represents the first successful fusion of internet culture, memetic patterns, and advanced biotechnology. Its genome is entirely synthetic, bearing no resemblance to any known forms of life. All development was based on adaptive coding algorithms utilizing data collected from internet archives <r>[data redacted]</c>.\nGigachad demonstrates physical strength, speed, and resilience that far exceed any biological standards. Notably, its muscle structure is so dense that it literally deflects ballistic projectiles, and its nervous system adapts to stressful conditions with astonishing speed. Furthermore, behavioral tests revealed an abnormally high level of confidence and charisma, likely a side effect of its memetic programming.\nHowever, the entity exhibits strange reactions to certain visual and audio stimuli tied to the concept of 'memes.' In the presence of such stimuli, its activity spikes, and its behavior becomes highly unpredictable. A recent incident <r>[data redacted]</c> forced us to reassess security measures.\nWe have decided to ship the entity for testing at a laboratory complex on the planet <r>[data redacted]</c>, as continued research in the current environment poses significant risks. The transport container is constructed from multilayered material resistant to memetic anomalies and biological threats. However, it is strongly advised to avoid even indirect visual contact with the entity.\nOur predictions regarding its capabilities in a controlled environment remain uncertain. If Gigachad displays the same adaptability and dominance observed in the laboratory, its potential as a memetic weapon requires serious ethical consideration. We are transferring the entity to you with the understanding that all further consequences now rest in your hands.\n\nSigned:\nDr. <r>[data redacted]</c>, Lead Specialist in Memetic Research.",
+            "id" : "SUBJECT #ga2247998574",
+            "departure"  : "<y>Departure:</c>\nRussia,\nInternet,\nEarth",
+            "arrival" : "<y>Destination:</c>\nUES Shipping Dock 0,\nRedview,\nMars"
 		}
 	}
 }

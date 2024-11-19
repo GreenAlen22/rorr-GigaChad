@@ -1,8 +1,8 @@
 {
-	"name": "Jam",
+	"name": "Gigachad",
 	"version_number": "1.0.0",
-	"website_url": "https://github.com/RoRRModdingToolkit/RoRR_Modding_Toolkit/wiki",
-	"description": "Example character for the RoRR Modding toolkit.",
+	"website_url": "https://github.com/GreenAlen22/rorr-GigaChad.git",
+	"description": "Gigachad is a synthetic creature embodying memetic strength, speed, charisma and unpredictability.",
 	"dependencies": [
 		"ReturnOfModding-ReturnOfModding-1.0.40",
 		"RoRRModdingToolkit-RoRR_Modding_Toolkit-1.1.21"
