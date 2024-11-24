@@ -2,7 +2,7 @@
 	"skill" : {
 		"GigachadZ" : {
 			"name" : "Stab",
-			"description" : "Stab for <y>90% damage</c> hitting <y>up to 5</c> enemies."
+			"description": "You perform a sweeping attack with your arm, dealing <y>250% damage.</c> \n<b>Hits up to 5 enemies per strike.</c>"
 		},
 		"GigachadX" : {
 			"name" : "Seismic shift",
@@ -19,6 +19,29 @@
 		"GigachadVBoosted" : {
 			"name": "Cosmic Radiance",
 			"description": "You perform a series of quick but light strikes, dealing <y>31% damage</c> with each hit. \n<b>While striking, you are invulnerable</c>"		
+		},
+
+
+
+		"GigachadZ2": {
+			"name": "Sparta",
+			"description": "You copy the King of Sparta, delivering a powerful kick that deals <y>500% damage.</c> \n<b>Hits up to 5 enemies per strike.</c>"
+		},
+		"GigachadX2": {
+			"name": "-",
+			"description": "-"
+		},
+		"GigachadC2": {
+			"name": "-",
+			"description": "<y>-"
+		},
+		"GigachadV2": {
+			"name": "-",
+			"description": "-"
+		},
+		"GigachadVBoosted2": {
+			"name": "-",
+			"description": "-"
 		}
 	},
 
