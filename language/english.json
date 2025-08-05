@@ -2,46 +2,46 @@
 	"skill" : {
 		"GigachadZ" : {
 			"name" : "Stab",
-			"description": "You perform a sweeping attack with your arm, dealing <y>250% damage.</c> \n<b>Hits up to 5 enemies per strike.</c>"
+			"description": "You perform a sweeping attack with your arm, dealing <y>200% damage.</c>"
 		},
 		"GigachadX" : {
 			"name" : "Seismic shift",
-			"description" : "You deliver a powerful stomp on the ground, creating stone spikes from the earth and dealing <y>2x3x400% damage.</c>"
+			"description" : "You deliver a powerful stomp on the ground, <y>2x220% damage</c> and creating stone spikes from the earth, which deal <y>2x220% damage.</c>"
         },
 		"GigachadC" : {
 			"name" : "A moment",
-			"description" : "<y>You move forward</c> a short distance.\nDuring this time, you are <b>invulnerable</c>."
+			"description" : "<y>You move forward</c> a medium distance.\nDuring this time, you are <b>invulnerable</c>."
 		},
 		"GigachadV" : {
 			"name": "Star Fury",
-			"description": "You perform a series of quick but light strikes, dealing <y>20% damage</c> with each hit. \n<b>For each hit, you gain a shield worth 35% of the damage dealt</c>"		
+			"description": "You perform a series of quick but light strikes, dealing <y>80x20% damage</c>. \n<b>You are given invulnerability for 3 seconds.</c>"		
 		},
 		"GigachadVBoosted" : {
 			"name": "Cosmic Radiance",
-			"description": "You perform a series of quick but light strikes, dealing <y>31% damage</c> with each hit. \n<b>While striking, you are invulnerable</c>"		
+			"description": "You perform a series of quick but light strikes, dealing <y>80x40% damage</c>. \n<b>You are given invulnerability for 4 seconds.</c>"			
 		},
 
 
 
 		"GigachadZ2": {
 			"name": "Sparta",
-			"description": "You copy the King of Sparta, delivering a powerful kick that deals <y>500% damage.</c> \n<b>Hits up to 5 enemies per strike.</c>"
+			"description": "You copy the King of Sparta, delivering a powerful kick that deals <y>400% damage.</c>"
 		},
 		"GigachadX2": {
-			"name": "-",
-			"description": "-"
+			"name": "Trolling",
+			"description": "You take a swing, dealing <y>100% damage</c> and invoke Troll Face, which pushes enemies apart, dealing <y>from 200% to 800% damage.</c>"
 		},
 		"GigachadC2": {
-			"name": "-",
-			"description": "<y>-"
+			"name": "Gigamusic",
+			"description": "Increase <y>attack speed by 60%</c>, and <b>movment speed by 40%</c>"
 		},
 		"GigachadV2": {
-			"name": "-",
-			"description": "-"
+			"name": "MeguMin",
+			"description": "You are replacing your essence with a dangerous meme, dealing <y>479900% damage </c> to everyone on the map. <b>After using it, you will die</c>"
 		},
 		"GigachadVBoosted2": {
-			"name": "-",
-			"description": "-"
+			"name": "MeguMax",
+			"description": "You are replacing your essence with a dangerous meme, dealing <y>479900% damage </c> to everyone on the map. <b>After using it, you will lose half of health </c>"
 		}
 	},
 

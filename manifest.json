@@ -4,7 +4,8 @@
 	"website_url": "https://github.com/GreenAlen22/rorr-GigaChad.git",
 	"description": "Gigachad is a synthetic creature embodying memetic strength, speed, charisma and unpredictability.",
 	"dependencies": [
-		"ReturnOfModding-ReturnOfModding-1.0.40",
-		"RoRRModdingToolkit-RoRR_Modding_Toolkit-1.1.21"
+		"ReturnOfModding-ReturnOfModding-1.0.53",
+		"RoRRModdingToolkit-RoRR_Modding_Toolkit-1.2.0",
+		"LuaENVY-ENVY-1.2.0"
 	]
 }

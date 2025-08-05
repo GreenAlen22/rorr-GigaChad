@@ -1,5 +1,5 @@
 # Gigachad en
-This is a modification that adds a new survivor named Gigashadow to Risk of Rain Returns. 
+This is a modification that adds a new survivor named Gigachad to Risk of Rain Returns. 
 
 Gigachad is a genetically created creature that surpasses all standards of strength, speed and charisma. Fast, powerful, unpredictable, perfect meme.
 [![](https://github.com/GreenAlen22/rorr-GigaChad/blob/main/gigachad/jump.png?raw=true)](https://github.com/GreenAlen22/rorr-GigaChad/blob/main/gigachad/jump.png?raw=true)
