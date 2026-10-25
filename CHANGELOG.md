@@ -1,73 +1,44 @@
-### v2.0.0
-# eng
-* Base Primary skill - the attack area has been changed once again, the attack speed has been increased, and the damage has been reduced.
-* Alt Primary skill - changed the attack area, increased attack speed, reduced damage.
-- ________________________________________
-* Base Second skill - the logic of operation has been redesigned once again, the area of attack has been changed, and the damage has been changed.
-* Alt Second skill - a new skill has been added.
-- ________________________________________
-* Base Utility skill - the logic of work has been redesigned.
-* Alt Utility skill - a new skill has been added. 
-- ________________________________________
-* Base Special skill - the sound has been changed, the logic of operation has been changed, the radius has been reduced, and parts have been added. 
-* Alt Special skill - A new skill has been added.
-- ________________________________________
-* Character characteristics have been changed.
-* Fixed a limitation for multiplayer.
-* Added new particles.
-* The logbook has been changed.
-* The character's sprite has been changed.
-* Added a drone model in a multiplayer.
-# rus
-* Base Primary навык - еще раз изменена область атаки, увеличена скорость атаки, уменьшен урон.
-* Alt Primary навык - изменена область атаки, увеличена скорость атаки, уменьшен урон.
-- ________________________________________
-* Base Second навык - еще раз переработана логика работы, изменена область атаки, изменен урон.
-* Alt Second навык - добавлен новый навык.
-- ________________________________________
-* Base Utility навык - переработана логика работы.
-* Alt Utility навык - добавлен новый навык. 
-- ________________________________________
-* Base Special навык - изменен звук, изменена логика работы, уменьшен радиус, добавлены партиклы. 
-* Alt Special навык - добавлен новый навык.
-- ________________________________________
-* Изменены характеристики персонажа.
-* Исправлено ограничение для совместной игры.
-* Добавлены новые частицы.
-* Изменен logbook.
-* Изменен спрайт персонажа.
-* Добавлена моделька дрона в совместной игре. 
+# Changelog
 
-### v1.1.0
-# eng
-* Primary skill: The attack area has been modified.
-* Primary skill: Now has a proc coefficient.
-- ________________________________________
-* Secondary skill: The logic has been reworked for improved functionality.
-- ________________________________________
-* Utility skill: The shift distance has been reduced for better control.
-- ________________________________________
-* Special skill: The sound volume has been decreased.
-* Special skill: Now grants invulnerability during activation.
-- ________________________________________
-* Character stats have been fixed and balanced.
-* A new texture for the active item "Crudely*Drawn Buddy" has been created.
-* New particle effects have been added.
-* A CHANGELOG has been introduced for better update tracking.
-* An alternative primary skill has been added.
-# rus
-* Primary навык - изменена область атаки
-* Primary навык - получил proc
-- ________________________________________
-* Second навык - переработана логика работы
-- ________________________________________
-* Utility навык - сокращена длина сдвига
-- ________________________________________
-* Special навык - уменьшена громкость звуков
-* Special навык - теперь дает неуязвимость
-- ________________________________________
-* Исправлены характеристики персонажа
-* Нарисована текстура dummy для активного предмета Crudely*Drawn Buddy
-* Добавлены новые частицы 
-* Добавлен CHANGELOG
-* Добавлен альтернативный primary навык
+## [3.0.0]
+
+### Added
+
+- Passive, Stance: while Gigachad attacks and for 1 second after, he takes 15% less damage and can't be stunned or knocked back. An anchor over his head shows it.
+- Six skins: black and white like the meme, blond with blue straps, East Asian, red-haired Nordic, olive-skinned, and a golden statue.
+
+### Changed
+
+- Now runs on ReturnsAPI instead of RoRR Modding Toolkit.
+- Health and armor gained per level lowered: 38 health instead of 44, 3 armor instead of 4. Base regeneration 0.03 instead of 0.04, 0.003 per level instead of 0.009.
+- Stab and Sparta hit in front of Gigachad, no longer behind him.
+- Sparta: 300% damage instead of 400%, stuns for 1.5 seconds and knocks enemies back. Every third kick deals 600% and knocks enemies twice as far.
+- Seismic Shift: 2x250% damage instead of 2x220% plus a hit behind, cooldown 6 seconds instead of 8.
+- A Moment dashes the same distance at any attack speed. The next attack within 1.5 seconds is a critical strike.
+- Trolling: the Troll Face deals 150% to 600% instead of 200% to 800% and grows with each enemy it kills.
+- Gigamusic: each kill adds 0.5 seconds, up to 16 seconds.
+- Star Fury: 25x30% damage and a 300% final blow instead of 80x20%. Attack speed makes the barrage faster. Cooldown 8 seconds instead of 10, counted from the end of the barrage. You cannot be hit while it lasts, instead of for a flat 3 seconds.
+- Cosmic Radiance: 35x40% damage and a 500% final blow instead of 100x40%.
+- MeguMin: a 2.6 second chant instead of 14, then 6000% damage around Gigachad instead of the whole map, cooldown 45 seconds instead of 60. Gigachad survives and cannot act for 2.5 seconds. He loses half his current health unless the blast kills 10 enemies.
+- MeguMax: 10000% damage over a huge area, no health cost, 1 second of being unable to act.
+- New explosion and magic circle for MeguMin, a smaller Troll Face.
+- New character select pod, portraits, climbing animation, drone and decoy.
+- Gigamusic no longer darkens Gigachad, and its music plays where he stands.
+
+### Fixed
+
+- Seismic Shift's third hit never landed.
+- Megumin stayed on the map until the end of the stage.
+- Skill names under the Ancient Scepter showed as raw text.
+- Gigachad could jump during Star Fury and MeguMin.
+- The Crudely Drawn Buddy decoy appeared far from where it was dropped.
+- Some hits landed twice in multiplayer.
+- Other players sometimes saw the wrong hit effect when the Troll Face struck.
+
+## [2.0.0]
+
+- New alternative skills for every slot, reworked Seismic Shift and A Moment.
+
+## [1.1.0]
+
+- Alternative primary skill, new decoy texture, Special grants invulnerability.
