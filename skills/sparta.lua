@@ -1,14 +1,13 @@
--- Z alt, Sparta: a slow, heavy kick ahead that stuns and throws enemies back.
--- Every third kick is THIS IS SPARTA: double damage, a wider reach and twice
--- the throw.
+-- Z alt, Sparta: тяжёлый пинок, оглушает и отбрасывает.
+-- Каждый третий — THIS IS SPARTA: x2 урон, шире, отброс x2.
 
 local S      = GIGACHAD.Assets.sprites
 local Attack = GIGACHAD.Attack
 
 local DAMAGE    = 3.0
-local BIG_EVERY = 3      -- every third kick is the big one
+local BIG_EVERY = 3      -- каждый третий — большой
 local BIG_MULT  = 2
-local HIT_FRAME = 6      -- leg fully out (shoot1_2.png, frames 5-7)
+local HIT_FRAME = 6      -- нога выпрямлена (кадры 5-7)
 local ANIM      = 0.2
 
 local skill = Skill.new("GigachadZ2")
@@ -29,9 +28,7 @@ end)
 Callback.add(state.on_enter, function(actor, data)
     actor.image_index = 0
     data.fired = 0
-    -- The count lives on the actor, not the state, so it carries between
-    -- kicks. Every machine plays the state and counts the same; only the
-    -- owner's count decides the damage.
+    -- Счётчик на актёре, чтобы жил между пинками. Урон решает счёт владельца.
     local kicks = Instance.get_data(actor, "sparta", _ENV["!guid"])
     kicks.n = (kicks.n or 0) + 1
     data.big = (kicks.n % BIG_EVERY == 0) and 1 or 0
@@ -48,7 +45,7 @@ Callback.add(state.on_step, function(actor, data)
         Attack.zone(actor, big and damage * BIG_MULT or damage, 40, big and 160 or 130, 90, {
             sparks    = gm.constants.sSparks7,
             primary   = true,
-            stun      = 1,     -- 1.5 s (knowledge/mechanics.md)
+            stun      = 1,     -- 1,5 с
             knockback = big and 12 or 6,
         })
         actor:screen_shake(big and 10 or 5)

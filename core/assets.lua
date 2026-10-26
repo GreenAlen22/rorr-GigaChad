@@ -1,11 +1,6 @@
--- Every sprite and sound of the mod, loaded in one place.
---
--- Sprite.new on a bad path calls log.error, which throws: one broken file
--- would cut off every load after it. Each load is wrapped, failures are
--- collected and printed once, so the cause is not buried under the fallout.
---
--- Identifiers carried over from 2.x stay as they were: SPPModdedSurvivors looks
--- some of them up by name.
+-- Все спрайты и звуки мода.
+-- - Каждая загрузка в pcall: битый файл не обрывает остальные, ошибки — одним списком.
+-- - Идентификаторы 2.x не менять: SPPModdedSurvivors ищет по имени.
 
 local PATH = _ENV["!plugins_mod_folder_path"]
 
@@ -13,21 +8,17 @@ local A = { sprites = {}, sounds = {} }
 local failed = {}
 
 -- key = { identifier, file, frames, x_origin, y_origin, speed }
--- The body sprites share an origin: 36, 52 puts the feet 11 px under actor.y,
--- where the game expects them.
+-- Тело: начало 36, 52 — ноги на 11 px ниже actor.y.
 local SPRITES = {
     idle          = { "gigachad_idle",            "idle.png",             7, 36, 52, 0.5 },
     walk          = { "gigachad_walk",            "walk.png",            10, 36, 52 },
     jump          = { "gigachad_jump",            "jump.png",             1, 36, 52 },
-    -- Seen from behind; x 35 is the rope his hands hold in every frame.
+    -- Вид со спины; x 35 — верёвка в руках.
     climb         = { "gigachad_climb",           "climb.png",            6, 35, 52 },
     death         = { "gigachad_death",           "death.png",           11, 36, 52 },
-    -- A plush toy of him pressing a barbell, 4 frames of a bounce; the game
-    -- would show frame 0 only, survivor.lua starts the animation.
+    -- Анимацию запускает survivor.lua.
     decoy         = { "gigachad_decoy",           "decoy.png",            4, 16, 20 },
-    -- Artificer's player drone with his beard and swept hair on the body,
-    -- as vanilla drones carry one detail of their survivor (art/build_droneA.py).
-    -- Frames and origins of sDronePlayerArtiIdle / Shoot.
+    -- Дрон Артификатора с бородой; кадры и начало как у sDronePlayerArti*.
     drone_idle    = { "gigachad_drone_idle",      "drone_idle.png",       5, 11, 14 },
     drone_shoot   = { "gigachad_drone_shoot",     "drone_shoot.png",      5, 25, 14 },
 
@@ -48,45 +39,36 @@ local SPRITES = {
     megumin       = { "gigachad_megumin",         "par_megumin.png",      1, 14, 22 },
     music         = { "gigachadBuff_music",       "par_gigamusic.png",   20, 16, 16, 0.25 },
     megu_blast    = { "gigachad_megu_blast",      "megu_blast.png",      14, 160, 250, 0.33 },
-    -- Buff icon frame (sBuffs: 36x28, centred), drawn by art/stance_icon.py.
+    -- Иконка баффа 36x28, по центру.
     stance        = { "gigachad_stance",          "stance_icon.png",      1, 18, 14 },
 
-    -- Skins: a column each, column 0 is the default (colours as drawn).
-    -- Body, portraits and character select each need their own, built by
-    -- art/skins.py. Without a palette ReturnsAPI warns on every spawn and
-    -- borrows Commando's.
+    -- Скины: столбец на скин, 0 — по умолчанию. Без палитры API берёт Коммандо.
     palette          = { "gigachad_palette",          "palette.png",          1, 0, 0 },
     palette_portrait = { "gigachad_palette_portrait", "palette_portrait.png", 1, 0, 0 },
     palette_loadout  = { "gigachad_palette_loadout",  "palette_loadout.png",  1, 0, 0 },
 
-    -- Seated, chained, a locked box over his face: a weapon in storage.
-    -- Built on sSelectCommando,
-    -- powers up over frames 0-2.
+    -- Разгорается на кадрах 0-2.
     loadout       = { "sSelectGigachad",          "sSelectGigachad.png", 13, 28,  0 },
     portrait      = { "sGigachadPortrait",        "sGigachadPortrait.png", 3, 0, 0 },
     portrait_small= { "sGigachadPortraitSmall",   "sGigachadPortraitSmall.png", 1, 0, 0 },
     log_portrait  = { "sGigachadPortraitLogo",    "sGigachadPortraitLogo.png", 1, 0, 0 },
 }
 
--- key = { identifier, file }. Ogg in the package, wav masters in .sfx-draft:
--- the owner's call of 05.10.2026 (knowledge/mcp.md, "Формат"). Sound.new
--- streams an .ogg from disk, which once crashed a game with forty effects; if
--- that comes back, `sfx_deploy.py --wav` and the extension here change together.
+-- key = { identifier, file }
+-- Ogg — решение владельца 05.10.2026. Вернутся вылеты — `sfx_deploy.py --wav`
+-- и расширение здесь.
 local SOUNDS = {
     ora           = { "gigachad_ora",             "snd_ora.ogg" },
     trollface     = { "gigachad_trollface",       "snd_trollface.ogg" },
     gigamusic     = { "gigachad_gigamusic",       "snd_gigamusic.ogg" },
     megumin_cast  = { "gigachad_megumin_cast",    "snd_megumin_cast.ogg" },
-    -- Two takes of the blast, for the owner's ear; skills/explosion.lua picks.
+    -- Два дубля; выбирает skills/explosion.lua.
     megumin_blast_a = { "gigachad_megumin_blast_a", "snd_megumin_blast_a.ogg" },
     megumin_blast_b = { "gigachad_megumin_blast_b", "snd_megumin_blast_b.ogg" },
 }
 
--- The game numbers each sprite and sound for the network in the order they
--- are added (scr_ResourceManager.gml, register), and attack sparks travel by
--- that number (write_sparks_sprite). pairs() walks a table in a different
--- order on each machine, so the host drew some other sprite where a client's
--- hit had par_small_trollface. Sorted keys give every machine the same order.
+-- Сеть нумерует ресурсы по порядку добавления, искры атак ходят по номеру.
+-- У pairs() порядок на машинах разный — сортируем ключи.
 local function sorted_keys(t)
     local keys = {}
     for k in pairs(t) do keys[#keys + 1] = k end
@@ -116,8 +98,7 @@ for _, key in ipairs(sorted_keys(SOUNDS)) do
 end
 
 if #failed > 0 then
-    -- Thrown, not logged: a survivor without half its sprites is worse than a
-    -- survivor that did not load, and main.lua reports the module as failed.
+    -- Ошибка, не лог: выживший без спрайтов хуже незагруженного.
     error("assets failed to load: "..table.concat(failed, "; "))
 end
 

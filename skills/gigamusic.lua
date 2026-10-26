@@ -1,9 +1,5 @@
--- C alt, Gigamusic: +60% attack speed and +40% movement speed for 8 s, with a
--- spinning record over his head. Each kill while it plays adds half a second,
--- up to 16 s in all.
---
--- 2.x kept its own timer table beside the game's, darkened the hero for the
--- whole buff and played the music to every player at full volume.
+-- C alt, Gigamusic: +60% скорости атаки и +40% движения на 8 с.
+-- Убийство под музыку: +0,5 с, всего до 16 с.
 
 local S      = GIGACHAD.Assets.sprites
 local Sounds = GIGACHAD.Assets.sounds
@@ -11,8 +7,8 @@ local Sounds = GIGACHAD.Assets.sounds
 local DURATION     = 8 * 60
 local ATTACK_SPEED = 0.6
 local MOVE_SPEED   = 1.4
-local NOTE_HEIGHT  = 100   -- px above actor.y
-local KILL_BONUS   = 30    -- frames added per kill
+local NOTE_HEIGHT  = 100   -- px над actor.y
+local KILL_BONUS   = 30    -- кадров за убийство
 local MAX_TOTAL    = 16 * 60
 
 local buff = Buff.new("gigamusic")
@@ -28,11 +24,10 @@ RecalculateStats.add(function(actor, api)
     end
 end)
 
--- Kills are seen by the host only (ON_KILL_PROC, knowledge/net.md), and the
--- buff is the host's to time: a client keeps it until the host removes it
--- (step_buff.gml:8-12), so the extension reaches it with the removal.
+-- Убийства видит только хост, таймер баффа хостовый: клиент держит бафф,
+-- пока хост не снимет.
 Callback.add(Callback.ON_KILL_PROC, function(target, attacker)
-    -- buff_set_time has no client guard of its own (knowledge/net.md).
+    -- У buff_set_time нет своей защиты от клиента.
     if not Net.host then return end
     if not Instance.exists(attacker) or attacker:buff_count(buff) == 0 then return end
     local d = Instance.get_data(attacker, "gigamusic", _ENV["!guid"])
@@ -42,9 +37,8 @@ Callback.add(Callback.ON_KILL_PROC, function(target, attacker)
     attacker:buff_set_time(buff, attacker:buff_get_time(buff) + add)
 end)
 
--- The record follows its owner while the buff lasts. The first second it
--- stays regardless: on a client the buff arrives from the host a few frames
--- after the skill.
+-- Пластинка живёт, пока есть бафф. Первую секунду — всегда: клиенту бафф
+-- приходит с задержкой.
 local GRACE = 60
 
 local note = Object.new("EfGigamusic")
@@ -77,14 +71,12 @@ skill.damage     = 0
 skill.cooldown   = 20 * 60
 skill.is_utility = true
 
--- Using the skill is instant: no animation of its own to stand through.
--- 2.x played shoot3_2.png, four blurry frames cut at a fractional width.
+-- Мгновенно, без своей анимации.
 Callback.add(skill.on_activate, function(actor)
     if Net.host then
         Instance.get_data(actor, "gigamusic", _ENV["!guid"]).extra = 0
         actor:buff_apply(buff, DURATION)
-        -- buff_apply does not refresh a buff already at max stack
-        -- (knowledge/items.md).
+        -- buff_apply не обновляет бафф на максимуме стаков.
         actor:buff_set_time(buff, DURATION)
     end
 

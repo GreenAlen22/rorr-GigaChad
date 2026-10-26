@@ -1,5 +1,4 @@
--- The survivor itself: menus, body sprites, stats, logbook. Skills take their
--- slots from GIGACHAD.Survivor.
+-- Выживший: меню, спрайты тела, статы, лог.
 
 local S = GIGACHAD.Assets.sprites
 
@@ -12,7 +11,7 @@ gigachad.sprite_title          = S.walk
 gigachad.sprite_idle           = S.idle
 gigachad.sprite_credits        = S.idle
 gigachad.primary_color         = Color.from_rgb(115, 88, 85)
--- x, y, x when climbing, y when climbing
+-- x, y, x и y на лестнице
 gigachad.cape_offset           = Array.new({-3, -36, 2, -35})
 
 Callback.add(gigachad.on_init, function(actor)
@@ -28,9 +27,7 @@ Callback.add(gigachad.on_init, function(actor)
     actor.sprite_drone_shoot = S.drone_shoot
 end)
 
--- The game keeps every decoy on its first frame (oEfDecoy Create sets
--- image_speed = 0); his plush bounces. Cosmetic: each machine starts the
--- animation on its own copy of the decoy.
+-- Игра держит приманку на кадре 0; анимацию запускаем сами (косметика, локально).
 local DECOY_SPEED = 0.12
 
 Callback.add(gigachad.on_step, function()
@@ -41,11 +38,8 @@ Callback.add(gigachad.on_step, function()
     end
 end)
 
--- A melee fighter with two invulnerable skills (A Moment, Star Fury) and the
--- Stance passive: he does not need HAN-D's bulk too. Growth sits between
--- Mercenary (36 hp, 3 armor) and HAN-D (44 hp, 3 armor); regen grows at the
--- vanilla top of 0.003. 2.x grew faster than either (PLAN.md).
--- The key is `health`: 2.x passed `maxhp`, a name ReturnsAPI does not read.
+-- Рост между Наёмником и HAN-D: есть неуязвимость и Стойка.
+-- Ключ health: maxhp ReturnsAPI не читает.
 gigachad:set_stats_base({
     health = 120,
     damage = 12,
@@ -58,21 +52,20 @@ gigachad:set_stats_level({
     armor  = 3,
 })
 
--- One identifier per palette column, in the order of SKINS in art/skins.py.
--- No achievements: every skin is open from the start.
+-- Порядок как в SKINS из art/skins.py; все скины открыты сразу.
 gigachad:add_skin(
     { "default", "meme", "slav", "asian", "nordic", "latino", "golden" },
     S.palette, S.palette_portrait, S.palette_loadout)
 
--- After the stats: the log copies them.
+-- После статов: лог их копирует.
 local log_entry = SurvivorLog.new_from_survivor(gigachad)
 log_entry.portrait_id = S.log_portrait
--- SurvivorLog.new leaves it undefined (scr_survivorLog.gml:83).
+-- SurvivorLog.new его не задаёт.
 log_entry.portrait_index = 0
 log_entry.sprite_id   = S.walk
 
 GIGACHAD.Survivor = {
     survivor = gigachad,
-    -- The four default slots the survivor was created with.
+    -- Слоты по умолчанию.
     slot = function(slot) return gigachad:get_skills(slot)[1] end,
 }

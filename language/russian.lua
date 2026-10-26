@@ -1,5 +1,4 @@
--- Gigachad: russian. Keys follow the game's tokens: skill.<id>.*,
--- survivor.<id>.* (scr_survivor.gml, skill_create.gml).
+-- Gigachad: russian. Ключи — токены игры: skill.<id>.*, survivor.<id>.*
 
 return {
     skill = {

@@ -1,8 +1,4 @@
--- X, Seismic Shift: a stomp that raises stone spikes ahead of him, which hit
--- twice.
---
--- 2.x waited for frames 6, 10 and 14 of a 12-frame animation (the third hit
--- never came) and fired a second, smaller hit behind him on every machine.
+-- X, Seismic Shift: топот, шипы впереди бьют дважды.
 
 local S      = GIGACHAD.Assets.sprites
 local Attack = GIGACHAD.Attack
@@ -10,9 +6,9 @@ local Fx     = GIGACHAD.Fx
 
 local DAMAGE = 2.5
 local ANIM   = 0.35
--- The foot comes down on frame 8 (shoot2.png); the spikes settle by frame 10.
+-- Нога опускается на кадре 8, шипы встают к 10.
 local HIT_FRAMES = { 8, 10 }
-local REACH  = 95        -- centre of the spike field, px ahead
+local REACH  = 95        -- центр поля шипов, px впереди
 local WIDTH, HEIGHT = 220, 120
 
 local skill = GIGACHAD.Survivor.slot(Skill.Slot.SECONDARY)
@@ -42,9 +38,7 @@ Callback.add(state.on_step, function(actor, data)
         data.hits = data.hits + 1
         Attack.zone(actor, actor:skill_get_damage(skill.value), REACH, WIDTH, HEIGHT,
             { sparks = S.spike_sparks })
-        -- The spikes rise once, with the first hit; the second hit is the same
-        -- field striking again. Drawn here, facing his way, on every machine.
-        -- Speed 0.3 is what oEfSparks played in 2.x.
+        -- Шипы встают один раз, с первым ударом; рисует каждая машина.
         if data.hits == 1 then
             local dir = Attack.dir(actor)
             Fx.once(S.spike, actor.x + REACH * dir, actor.y, { xscale = dir, speed = 0.3 })

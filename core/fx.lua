@@ -1,16 +1,11 @@
--- Cosmetic helpers shared by several skills. Every machine runs them for
--- itself: skill states play out everywhere, so nothing here is sent.
+-- Косметика навыков. Каждая машина рисует сама, по сети ничего.
 
 local Fx = {}
 
--- Plays a sprite once and removes it. oEfSparks destroys itself on animation
--- end (gml_Object_oEfSparks_Other_7). Its Create picks a random vertical flip,
--- so yscale is always set here.
---
--- sprite: a Sprite or a vanilla sprite id (the setter unwraps either).
--- opts.speed multiplies the sprite's own speed (image_speed in GameMaker):
--- 1 plays a sprite at the speed set in core/assets.lua.
--- opts: speed, xscale, yscale, depth, alpha, angle
+-- Спрайт один раз и удалить (oEfSparks).
+-- yscale задаётся всегда: Create случайно отражает по вертикали.
+-- sprite — Sprite или ванильный id; opts: speed, xscale, yscale, depth, alpha, angle.
+-- speed 1 — скорость из core/assets.lua.
 function Fx.once(sprite, x, y, opts)
     opts = opts or {}
     local inst = Instance.create(x, y, gm.constants.oEfSparks)
@@ -25,8 +20,7 @@ function Fx.once(sprite, x, y, opts)
     return inst
 end
 
--- An afterimage of the actor's current frame that fades on its own
--- (gml_Object_oEfTrail_Step_2).
+-- Шлейф: копия текущего кадра, гаснет сама.
 function Fx.trail(actor, alpha)
     local trail = Instance.create(actor.x, actor.y, gm.constants.oEfTrail)
     trail.sprite_index = actor.sprite_index

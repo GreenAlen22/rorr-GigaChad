@@ -1,24 +1,17 @@
--- Gigachad: a melee survivor for Risk of Rain Returns.
---
--- The design lives in PLAN.md at the project root. Engine traps live in
--- rorr_cloding/knowledge/.
+-- Gigachad: выживший ближнего боя.
 
 mods["LuaENVY-ENVY"].auto()
 mods["ReturnsAPI-ReturnsAPI"].auto{
-    -- Kept from 2.x: SPPModdedSurvivors finds Gigachad under this namespace.
+    -- С 2.x: по нему ищет SPPModdedSurvivors.
     namespace = "GreenAlen22",
-    -- Without it the API greys out the Online button for the whole modpack.
+    -- Без него API гасит кнопку Online.
     mp        = true,
 }
 
--- Absolute, and taken here rather than from somebody's global: a relative
--- require resolves against whichever mod the engine credits with the calling
--- closure, and from a deferred callback that was once another plugin's folder.
+-- Абсолютный путь: относительный require из отложенного колбэка уходит в чужую папку.
 local PATH = _ENV["!plugins_mod_folder_path"].."\\"
 
--- Load order (rorr_cloding/knowledge/bootstrap.md): assets before anything
--- that draws or plays them, shared helpers before the skills, the survivor
--- before its skills, which take their slots from it.
+-- Порядок: ассеты → хелперы → выживший → навыки.
 local modules = {
     "core/assets",
     "core/attack",
@@ -32,13 +25,11 @@ local modules = {
     "skills/trolling",
     "skills/gigamusic",
     "skills/explosion",
-    -- The passive reads the attack states of the skills above.
+    -- Читает состояния навыков выше.
     "skills/stance",
 }
 
--- A module fails to load two ways, and both are silent: the file is not at that
--- path (require says nothing and returns), or it throws partway through.
--- io.open catches the first, pcall the second.
+-- Оба провала молчаливые: нет файла (ловит io.open) или ошибка внутри (ловит pcall).
 local function load(name)
     local file = (PATH..name..".lua"):gsub("/", "\\")
 
@@ -49,9 +40,7 @@ local function load(name)
     end
     f:close()
 
-    -- Not `pcall(require, file)`: there the frame above require is pcall, a C
-    -- function with no environment, and the engine credits the module to the
-    -- first loaded plugin.
+    -- Не pcall(require, file): модуль припишется первому загруженному плагину.
     local ok, err = pcall(function() require(file) end)
     if not ok then
         log.warning("Gigachad: FAILED to load "..name.." -> "..tostring(err))
@@ -60,8 +49,7 @@ local function load(name)
     return true
 end
 
--- A successful require proves nothing on its own; modules talk through the
--- global GIGACHAD, so their branches existing is the evidence the code ran.
+-- Модуль отработал, если его ветка есть в GIGACHAD.
 local expected = {
     "Assets", "Attack", "Fx", "Survivor",
     "Stab", "Seismic", "Moment", "StarFury",

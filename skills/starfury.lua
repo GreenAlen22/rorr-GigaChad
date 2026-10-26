@@ -1,23 +1,19 @@
--- V, Star Fury: a rush of punches ahead of him and a heavy last blow that
--- throws enemies back, invulnerable while it lasts. Attack speed quickens the
--- rush, as it does Eviscerate's: the same damage, sooner, and less time immune.
--- Under Ancient Scepter: Cosmic Radiance, more and wider punches.
---
--- 2.x: 80 hits of 20% and 3 s of invulnerability every 10 s, about twice what
--- a vanilla special deals (HAN-D's is 500%, PLAN.md).
+-- V, Star Fury: серия ударов и добивающий с отбросом, неуязвим всё время.
+-- - Скорость атаки ускоряет серию: тот же урон раньше, меньше неуязвимости.
+-- - Скипетр, Cosmic Radiance: больше и шире удары.
 
 local S      = GIGACHAD.Assets.sprites
 local Sounds = GIGACHAD.Assets.sounds
 local Attack = GIGACHAD.Attack
 
-local ANIM      = 0.45   -- 41 frames: about 90 game frames at base attack speed
-local START     = 5      -- the rush starts on this frame of shoot4.png
-local INTERVAL  = 3      -- game frames between punches at base attack speed
-local PROC_EVERY = 3     -- every third punch carries item effects
-local ORA_EVERY = 10     -- the "ORA" line every tenth punch
+local ANIM      = 0.45   -- 41 кадр: ~90 кадров игры при базовой скорости
+local START     = 5      -- кадр начала серии
+local INTERVAL  = 3      -- кадров между ударами при базовой скорости
+local PROC_EVERY = 3     -- эффекты предметов каждый третий удар
+local ORA_EVERY = 10     -- «ORA» каждый десятый удар
 
 local VARIANTS = {
-    -- finisher: the last blow, in the same units as damage (3.0 = 300%)
+    -- finisher: добивающий, в единицах damage (3.0 = 300%)
     normal  = { id = "GigachadV",        subimage = 3, damage = 0.3, punches = 25,
                 finisher = 3.0, w = 120, h = 100 },
     boosted = { id = "GigachadVBoosted", subimage = 4, damage = 0.4, punches = 35,
@@ -39,9 +35,7 @@ local function setup(skill, v)
 
     Callback.add(state.on_enter, function(actor, data)
         actor.image_index = 0
-        -- Every state enters as activity_type 1, which lets him jump out of
-        -- it (scr_actor_phy.gml:114); 3 holds him, as Acrid's teleport does
-        -- (scr_ror_init_survivor_acrid_alts.gml:263).
+        -- activity_type 3: из состояния не выпрыгнуть (как телепорт Акрида).
         actor.activity_type = 3
         data.hits = 0
         data.wait = 0
@@ -51,15 +45,12 @@ local function setup(skill, v)
         actor:skill_util_fix_hspeed()
         actor:actor_animation_set(S.starfury, ANIM)
 
-        -- Immune only while the skill runs; it drops two frames after.
+        -- Неуязвим, пока идёт навык; снимается через 2 кадра.
         if (tonumber(actor.invincible) or 0) < 2 then actor.invincible = 2 end
-        -- The cooldown waits for the rush to end, as Eviscerate's does
-        -- (scr_ror_init_survivor_merc.gml:104). Left running, four Alien Heads
-        -- bring it back before it ends: invulnerable for good.
+        -- Перезарядка ждёт конца серии, иначе Alien Head дают вечную неуязвимость.
         actor:get_active_skill(Skill.Slot.SPECIAL):freeze_cooldown()
 
-        -- One punch per INTERVAL frames of base attack speed: the debt is
-        -- paid off by attack_speed each frame, so faster hands punch sooner.
+        -- Удар раз в INTERVAL кадров; скорость атаки сокращает ожидание.
         if actor.image_index >= START and data.hits <= v.punches then
             data.wait = data.wait - (tonumber(actor.attack_speed) or 1)
             if data.wait <= 0 then
@@ -89,8 +80,7 @@ local function setup(skill, v)
             end
         end
 
-        -- The punches outlast the animation at low attack speed, or fall
-        -- short at high; the state ends when both are done.
+        -- Удары и анимация расходятся по скорости атаки; выход, когда кончились оба.
         if data.hits > v.punches then
             actor:skill_util_exit_state_on_anim_end()
         elseif actor.image_index >= 35 then

@@ -1,16 +1,13 @@
--- C, A Moment: a dash at a fixed height, invulnerable throughout. The next
--- hit after it is critical, so the dash is a way in as well as a way out.
+-- C, A Moment: рывок на одной высоте, неуязвим. Следующий удар — крит.
 
 local S  = GIGACHAD.Assets.sprites
 local Fx = GIGACHAD.Fx
 local Attack = GIGACHAD.Attack
 
--- Speed in units of the actor's own pHmax. 2.x scaled it with attack speed
--- (up to x1.5), so the dash grew longer with Soldier's Syringes; now it is
--- fixed at what 2.x reached at x1.25.
+-- В единицах pHmax; от скорости атаки не зависит.
 local SPEED = 5
-local TRAIL_EVERY = 2    -- frames between afterimages; 2.x made one a frame
-local CRIT_WINDOW = 90   -- frames after the dash in which the next hit crits
+local TRAIL_EVERY = 2    -- кадров между шлейфами
+local CRIT_WINDOW = 90   -- кадров после рывка, когда удар критует
 
 local skill = GIGACHAD.Survivor.slot(Skill.Slot.UTILITY)
 skill.sprite     = S.skills
@@ -31,15 +28,13 @@ Callback.add(state.on_enter, function(actor, data)
     data.y = actor.y
     data.t = 0
 
-    -- The game turns him to the held direction before the skill starts and
-    -- sends that facing with it (scr_skill_system.gml:51-60), so facing is the
-    -- same on every machine.
+    -- Направление игра шлёт с навыком — одинаково на всех машинах.
     data.dir = Attack.dir(actor)
 end)
 
 Callback.add(state.on_step, function(actor, data)
     actor:skill_util_fix_hspeed()
-    -- Not scaled by attack speed: the dash keeps one length.
+    -- Без скорости атаки: длина рывка постоянная.
     actor:actor_animation_set(S.moment, 1, false)
 
     if (tonumber(actor.invincible) or 0) < 2 then actor.invincible = 2 end

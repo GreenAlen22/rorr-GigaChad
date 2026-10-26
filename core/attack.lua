@@ -1,15 +1,11 @@
--- One way to land a melee hit, so every skill handles ownership, Shadow Clone
--- and Heaven Cracker the same.
---
--- Skill states run on every machine (knowledge/net.md); the hit is fired by the
--- actor's owner only, and fire_explosion syncs it to the rest. 2.x fired some
--- hits outside this check, and online each machine dealt them again.
+-- Удар зоной для всех навыков: владелец, Shadow Clone, Heaven Cracker.
+-- Бьёт только владелец актёра, fire_explosion рассылает остальным.
 
 local SHADOW_CLONE = Buff.find("shadowClone", "ror")
 
 local Attack = {}
 
--- +1 when facing right, -1 when facing left.
+-- 1 вправо, -1 влево.
 function Attack.dir(actor)
     return (tonumber(actor:skill_util_facing_direction()) == 180) and -1 or 1
 end
@@ -22,30 +18,23 @@ local function crit_data(actor)
     return Instance.get_data(actor, "crit", _ENV["!guid"])
 end
 
--- A Moment leaves a charge: the next zone hit within `frames` is critical.
--- Set on every machine with the skill state; spent by the owner, who alone
--- fires the hit.
+-- Заряд A Moment: следующий удар зоной за frames кадров — крит.
+-- Ставится везде, тратит владелец.
 function Attack.charge_crit(actor, frames)
     crit_data(actor).until_frame = Global._current_frame + frames
 end
 
--- Effects at the centre are drawn by the skill with GIGACHAD.Fx: the explosion
--- sprite of fire_explosion would repeat per clone and never face left
--- (gml_Object_oExplosionAttack_Step_1 passes xscale 1).
---
--- Fires a w x h explosion centred dx px ahead of the actor, once per Shadow
--- Clone stack plus one. Spends a crit charge from Attack.charge_crit on every
--- one of them. Returns the attack instances (empty off the owner).
---
+-- Взрыв w x h на dx px впереди, по разу на стак Shadow Clone + 1.
+-- Тратит заряд крита. Возвращает атаки (пусто не у владельца).
+-- Эффект в центре рисует навык через Fx: спрайт fire_explosion не смотрит влево.
 -- opts:
---   dy        vertical offset of the centre
---   sparks    sprite drawn on each actor hit
---   proc      false = no item effects (default true)
---   primary   true = Heaven Cracker may replace the hit; it counts primary
---             attacks only, as in vanilla
---   stun      attack_info.stun (1 = 1.5 s, knowledge/mechanics.md)
---   knockback attack_info.knockback, pushed the way the actor faces
---   max_hit   enemies one hit may strike (0 = no limit)
+--   dy        сдвиг центра по вертикали
+--   sparks    спрайт на каждом задетом
+--   proc      false — без эффектов предметов (по умолчанию true)
+--   primary   true — может сработать Heaven Cracker
+--   stun      1 = 1,5 с
+--   knockback отброс в сторону взгляда
+--   max_hit   врагов за удар (0 — без предела)
 function Attack.zone(actor, damage, dx, w, h, opts)
     opts = opts or {}
     local hits = {}

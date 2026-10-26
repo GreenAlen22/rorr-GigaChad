@@ -1,10 +1,10 @@
--- Z, Stab: a spin of the arm into a punch, one hit ahead of him.
+-- Z, Stab: замах и удар кулаком впереди.
 
 local S      = GIGACHAD.Assets.sprites
 local Attack = GIGACHAD.Attack
 
 local DAMAGE    = 2.0
-local HIT_FRAME = 10     -- the fist lands here (shoot1_1.png, frames 10-13)
+local HIT_FRAME = 10     -- кулак попадает (кадры 10-13)
 local ANIM      = 0.45
 
 local skill = GIGACHAD.Survivor.slot(Skill.Slot.PRIMARY)
@@ -32,7 +32,6 @@ Callback.add(state.on_step, function(actor, data)
 
     if data.fired == 0 and actor.image_index >= HIT_FRAME then
         data.fired = 1
-        -- 2.x centred the 120 px box on the body and hit behind him as well.
         Attack.zone(actor, actor:skill_get_damage(skill.value), 30, 120, 100,
             { sparks = gm.constants.sSparks7, primary = true })
         actor:screen_shake(2)
